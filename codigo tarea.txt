@@ -1,0 +1,52 @@
+setwd("C:/Users/steffano/Desktop/tarea")
+file <- paste0(getwd(),"/respladocon2.csv")
+data<- read.csv2(file=file,head=TRUE)
+str(data)
+
+
+# PERMITE OBTENER LA MEDIA DE LAS VARIABLES
+Prgasco <- mean(data$RGASCO)
+Prcap <- mean(data$RCAP)
+Preigpa <- mean(data$REIGPA)
+Prbupcl <- mean(data$RBUPCL)
+
+# PERMITE OBTENER LA DESVIACION ESTANDAR DE LAS VARIABLES
+
+ergasco <- sd(data$RGASCO)
+ercap <- sd(data$RCAP)
+ereigpa <- sd(data$REIGPA)
+erbupcl <-  sd(data$RBUPCL)
+
+# PERMITE OBTENER LA CORRELACION ENTRE LOS RETORNO
+x <- data.frame(data$REIGPA,data$RGASCO,data$RCAP,data$RBUPCL)
+Matrizcor <- cor(x)
+
+# PERMITE OBTENER LAS REGRESIONES LINEALES
+lmgasco <- lm(data$RGASCO ~ data$REIGPA , data=data)
+summary(lmgasco)
+
+lmcap <- lm(data$RCAP ~ data$REIGPA , data=data)
+summary(lmcap)
+
+lmbupcl <- lm(data$RBUPCL ~ data$REIGPA , data=data)
+summary(lmbupcl)
+
+
+# PERMITE INTALAR EL PAQUETE PARA GRAFICAR
+install.packages("ggplot2")
+library(ggplot2)
+
+# PERMITE GRAFICAR LAS VARIABLE PEDIDA RESPECTO A LA FECHA
+
+qplot (data$FECHA,data$RBUPCL,data=data)
+qplot (data$FECHA,data$RCAP,data=data)
+qplot (data$FECHA,data$RGASCO,data=data)
+qplot (data$FECHA,data$REIGPA,data=data)
+
+qplot (data$FECHA,data$PBUPCL,data=data)
+qplot (data$FECHA,data$PCAP,data=data)
+qplot (data$FECHA,data$PGASCO,data=data)
+qplot (data$FECHA,data$PIGPA,data=data)
+
+
+
